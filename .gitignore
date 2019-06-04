@@ -7,7 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 
 # Mongo
-/mongodb/
+/mongodb
 /mongodb/data/journal
 /src/mongo/db/modules
 /src/mongo/*/*Debug*/
