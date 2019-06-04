@@ -7,7 +7,19 @@ yarn-error.log*
 lerna-debug.log*
 
 # Mongo
-mongodb/
+/mongodb/
+/mongodb/data/journal
+/src/mongo/db/modules
+/src/mongo/*/*Debug*/
+/src/mongo/*/*/*Debug*/
+/src/mongo/*/*Release*/
+/src/mongo/*/*/*Release*/
+/src/ipch
+/src/mongo/*/ipch
+/src/mongo/*/*/ipch
+/src/mongo/db/.gdb*
+/src/mongo/db/makefile.local
+/src/mongo/db/_ReSharper.db
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
