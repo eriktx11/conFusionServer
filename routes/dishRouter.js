@@ -43,7 +43,7 @@ dishRouter.route('/')
 });
 
 
-//processing one dish 
+//processing one dish using promisses
 
 dishRouter.route('/:dishId')
 .get((req, res, next) =>{
