@@ -17,17 +17,68 @@ dishRouter.route('/')
         res.json(dishes);
     }, (err)=> next(err))
     .catch((err)=> next(err));
+})
+.post((req, res, next) => {
+    Dishes.create(req.body)
+    .then((dish) => {
+        console.log('Dish Created', dish);
+        res.statusCode = 200;
+        res.setHeader('Constant-Type', 'application/json');
+        res.json(dish);
+    }, (err)=> next(err))
+    .catch((err)=> next(err));
+})
+.put((rea, res, next)=>{
+    res.statusCode = 403;
+    res.end('PUT not supported')
+})
+.delete((req, res, next)=> {
+    Dishes.remove({})
+    .then((resp)=>{
+        res.statusCode = 200;
+        res.setHeader('Constant-Type', 'application/json');
+        res.json(resp);
+    }, (err)=> next(err))
+    .catch((err)=> next(err));
 });
 
 
-dishRouter.route('/:dishID')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-type', 'text/plain');
-    next();
-})
+//one dish 
+
+dishRouter.route('/:dishId')
 .get((req, res, next) =>{
-    res.send('Serving dish  34 in folder');
+    Dishes.findById(req.params.dishId)
+    .then((dish) => {
+        res.statusCode = 200;
+        res.setHeader('Constant-Type', 'application/json');
+        res.json(dish);
+    }, (err)=> next(err))
+    .catch((err)=> next(err));
+})
+.post((req, res, next)=>{
+    res.statusCode = 403;
+    res.end('POST not supported on /dishes/'+req.post);
+})
+.put((req, res, next)=>{
+    Dishes.findByIdAndUpdate(req.params.dishId, 
+        { $set: req.body },
+        { new: ture }
+    )
+    .then((dish)=>{
+        res.statusCode = 200;
+        res.setHeader('Constant-Type', 'application/json');
+        res.json(dish);
+    }, (err)=> next(err))
+    .catch((err)=> next(err));
+})
+.delete((req, res, next)=>{
+    Dishes.findByIdAndRemove(req.params.dishId)
+    .then((resp)=>{
+        res.statusCode = 200;
+        res.setHeader('Constant-Type', 'application/json');
+        res.json(resp);
+    }, (err)=> next(err))
+    .catch((err)=> next(err));
 });
 
 module.exports = dishRouter;
